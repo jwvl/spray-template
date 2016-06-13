@@ -23,6 +23,10 @@ class MyServiceActor extends Actor with MyService {
 // this trait defines our service behavior independently from the service actor
 trait MyService extends HttpService {
 
+  val accountSid = "AC11fff088b4b447c02ff1f9ac3fc768c5"
+  val token = "44f97e75bf1ae8cc79e57e8d02de2734"
+
+
   val myRoute =
     path("") {
       get {
@@ -34,6 +38,32 @@ trait MyService extends HttpService {
               </body>
             </html>
           }
+        }
+      }
+    } ~
+      path("voice") {
+        get {
+          complete {
+            <Response>
+              <Say>I just responded to a phone call. Huzzah!</Say>
+              <Play loop="2">
+                https://dl.dropboxusercontent.com/u/11489766/twilio/elearning/epic_sax.mp3
+              </Play>
+            </Response>
+          }
+        }
+      } ~ path("sms") {
+      get {
+        complete {
+          <Response>
+            <Message>Hee vuile gek</Message>
+          </Response>
+        }
+      }
+    } ~ path("send-sms") {
+      get {
+        complete {
+          SendSMS.sendMessage
         }
       }
     }
