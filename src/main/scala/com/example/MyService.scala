@@ -56,7 +56,7 @@ trait MyService extends HttpService {
       get {
         complete {
           <Response>
-            <Message>Hee vuile gek</Message>
+            <Message>Hallo daar</Message>
           </Response>
         }
       }
